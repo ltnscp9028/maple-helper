@@ -6,7 +6,7 @@ import AddOp from '../containers/AddOp';
 import Mvp from '../containers/Mvp';
 
 export default () => (
-    <Router>
+    <Router basename="/maple-helper">
         <Header/>
         <Route path="/Arcane" component={Arcane}/>
         <Route path="/AddOp" component={AddOp}/>
