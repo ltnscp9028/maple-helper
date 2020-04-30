@@ -7,9 +7,9 @@ const Header = () => (
     
     <div className="logo">
             <ul className="menu">
-                {/* <Link to="/Arcane"> */}
+                <Link to="/Arcane">
                     <li className="menu-item">Arcane</li>
-                    {/* </Link> */}
+                    </Link>
                 {/* <Link to="/AddOp"> */}
                     <li className="menu-item">AddOp</li>
                     {/* </Link> */}
