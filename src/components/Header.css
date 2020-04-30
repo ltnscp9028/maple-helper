@@ -1,6 +1,6 @@
 .logo{
     background-image: url('../images/logo-bg.jpg');
-    width: 100vw;
+    width: 100%;
     height: 225px;
     /* line-height: 150px; */
     color: white;

@@ -129,6 +129,7 @@
 	position: absolute;
 	top: 208px;
 	left: 295px;
+	/* width: calc(100% -  300px); */
 	max-width: 1620px;
 	max-height: 800px;
 	overflow: hidden;
