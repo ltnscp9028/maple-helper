@@ -1,0 +1,83 @@
+.logo{
+    background-image: url('../images/logo-bg.jpg');
+    width: 100vw;
+    height: 225px;
+    /* line-height: 150px; */
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    font-family: sans-serif;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); /* 그림자 */ 
+  }
+
+  .menu {
+    margin-top :0px;
+    margin-bottom: 0px;
+    height: 40px;
+    position: relative;
+    top: 173px;
+  }
+
+/* .menu-item{
+    display: inline-block;
+    color: white;
+    
+    line-height : 30px;
+    
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    position: relative;
+} */
+
+.menu-item{
+  /* display: inline-block; */
+  list-style: outside none none;
+  font-size: 18px;
+  width: 10%;
+  margin: 0.5em 1em;
+  /* padding: 0; */
+  /* text-decoration: none; */
+  /* color: rgba(255, 255, 255, 0.5); */
+
+  padding-top: 7px;
+  padding-bottom: 9px;
+  color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* .menu-item{
+  padding: 0.3em 0;
+  color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+} */
+.menu-item:before,
+.menu-item:after {
+  height: 3px;
+  position: absolute;
+  content: '';
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+  background-color: white;
+  width: 0;
+}
+.menu-item:before {
+  top: 0;
+  left: 0;
+}
+.menu-item:after {
+  bottom: 0;
+  right: 0;
+}
+.menu-item:hover{
+  color: #ffffff;
+}
+.menu-item:hover:before,
+.menu-item:hover:after{
+  width: 100%;
+}
