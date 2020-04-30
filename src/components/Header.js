@@ -15,7 +15,7 @@ const Header = () => (
                     <li className="menu-item">AddOp</li>
                     {/* </Link> */}
                    
-                    <Link to="/Mvp"><li className="menu-item">Mvp</li></Link>
+                    <Link to="maple-helper/Mvp"><li className="menu-item">Mvp</li></Link>
                 </BrowserRouter>   
             </ul>        
     </div>
