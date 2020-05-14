@@ -43,13 +43,13 @@
 .form_label{
     border: none;
     background: #4D4D4D;
-    height: 36px;
+    height: 31px;
     width: 120px;
     border: none;
     color: white;
     text-align: center;
     font-size: 15px;
-    padding-top: 5px;
+    padding-top: 10px;
     /* margin-bottom: 20px; */
     /* width: 100px; */
     /* float: left; */
