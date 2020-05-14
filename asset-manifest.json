@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/maple-helper/static/css/main.895e7ef0.chunk.css",
+    "main.css": "/maple-helper/static/css/main.23f5fc72.chunk.css",
     "main.js": "/maple-helper/static/js/main.4aa53415.chunk.js",
     "main.js.map": "/maple-helper/static/js/main.4aa53415.chunk.js.map",
     "runtime-main.js": "/maple-helper/static/js/runtime-main.52a660da.js",
@@ -8,16 +8,16 @@
     "static/js/2.bc9fac0e.chunk.js": "/maple-helper/static/js/2.bc9fac0e.chunk.js",
     "static/js/2.bc9fac0e.chunk.js.map": "/maple-helper/static/js/2.bc9fac0e.chunk.js.map",
     "index.html": "/maple-helper/index.html",
-    "precache-manifest.d3436d766045d432f66b1708d19d70ed.js": "/maple-helper/precache-manifest.d3436d766045d432f66b1708d19d70ed.js",
+    "precache-manifest.6b0bcdb7661426c11aa7284cff93c041.js": "/maple-helper/precache-manifest.6b0bcdb7661426c11aa7284cff93c041.js",
     "service-worker.js": "/maple-helper/service-worker.js",
-    "static/css/main.895e7ef0.chunk.css.map": "/maple-helper/static/css/main.895e7ef0.chunk.css.map",
+    "static/css/main.23f5fc72.chunk.css.map": "/maple-helper/static/css/main.23f5fc72.chunk.css.map",
     "static/js/2.bc9fac0e.chunk.js.LICENSE.txt": "/maple-helper/static/js/2.bc9fac0e.chunk.js.LICENSE.txt",
     "static/media/Header.css": "/maple-helper/static/media/logo-bg.aa2d728c.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.52a660da.js",
     "static/js/2.bc9fac0e.chunk.js",
-    "static/css/main.895e7ef0.chunk.css",
+    "static/css/main.23f5fc72.chunk.css",
     "static/js/main.4aa53415.chunk.js"
   ]
 }
