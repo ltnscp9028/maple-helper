@@ -10,9 +10,9 @@ const Header = () => (
                 {/* <Link to="/Arcane"> */}
                     <li className="menu-item">Arcane</li>
                     {/* </Link> */}
-                {/* <Link to="/AddOp"> */}
+                <Link to="/AddOp">
                     <li className="menu-item">AddOp</li>
-                    {/* </Link> */}
+                    </Link>
                    
                     <Link to="/Mvp"><li className="menu-item">Mvp</li></Link> 
             </ul>        
