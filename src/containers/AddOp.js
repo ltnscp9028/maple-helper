@@ -423,11 +423,11 @@ class AddOp extends React.Component{
     render(){
         return(
             <>
-                <this.inputAddOp/>
+                {/* <this.inputAddOp/> */}
                 <div className="view_stat">
-                    {/* <this.viewAddOp/> */}
+                    <this.viewAddOp/>
                 </div>
-                {/* <this.floatingStat/> */}
+                <this.floatingStat/>
                 {/* <div className="view_stat">{this.floatingStat}</div> */}
                 
             </>
