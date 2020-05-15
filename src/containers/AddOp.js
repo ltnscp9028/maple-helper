@@ -1,5 +1,4 @@
 /*eslint-disable */
-
 import React,{Component} from 'react';
 import './AddOp.css';
 
@@ -11,7 +10,7 @@ class AddOp extends Component{
     j=0; chk=0; fire_yn=0; stat_gaesu=0; id=0;
     mmap = new Set();
     arr2 = ["STR","DEX","LUK","INT","STR+DEX","STR+INT","STR+LUK","DEX+INT","DEX+LUK","INT+LUK"];
-    stat= ["str","dex","int","luk",
+    stat= ["STR","DEX","INT","LUK",
     "최대 HP", "최대 MP",
     "공격력", "마력",
     "방어력","이동속도", "점프력","올스탯","착용레벨 감소"];
@@ -20,7 +19,8 @@ class AddOp extends Component{
         stat_arr: [0,0,0,0,0,0,0,0,0,0,0,0,0],
         lv:'',
         check_fire:'',
-        addop_arr : []
+        addop_arr : [],
+        addop_sol : ''
     }
 
     handleChange = (e) => {
@@ -36,29 +36,6 @@ class AddOp extends Component{
         this.setState({
             [e.target.name]: e.target.value
         });
-    }
-
-    set_addop = () => {
-        const {lv} = this.state;
-        let {arr} = this;
-        for (let i = 0; i < 8; i++)arr[0][i] = arr[1][i] = arr[2][i] = arr[3][i] = arr[4][i] = (parseInt(lv / 20) + 1) * i;
-        for (let i = 0; i < 8; i++)arr[5][i] = arr[6][i] = arr[7][i] = arr[8][i] = arr[9][i] = (parseInt(lv / 40) + 1) * i;
-    
-        //	for(i=0;i<10;i++,puts(""))
-        //		for(j=0;j<8;j++)printf("%d ",arr[i][j]);
-    }
-
-    make_pick = () => {
-        const nn = 10;
-        const scn = 4 - this.stat_gaesu;
-        let {v,tempVector} = this;
-        // printf("%d %d\n",nn,scn);
-        console.log(`${nn} ${scn}`);
-        for (let i = 0; i < nn; i++)v.push(i);
-        for (let i = 0; i < scn; i++)tempVector.push(1);
-        for (let i = 0; i < nn - scn; i++)tempVector.push(0);
-        // sort(tempVector.begin(), tempVector.end());
-        tempVector.sort();
     }
 
     handleSubmit = (e) => {
@@ -84,7 +61,7 @@ class AddOp extends Component{
             stat_arr: [0,0,0,0,0,0,0,0,0,0,0,0,0],
             lv:'',
             check_fire:'',
-            
+            addop_sol:temp_arr
         })
         console.log(mmap);
         mmap.clear();
@@ -93,14 +70,34 @@ class AddOp extends Component{
         this.check_st = [];
         this.v = [];
     }
+
+    set_addop = () => {
+        const {lv} = this.state;
+        let {arr} = this;
+        for (let i = 0; i < 8; i++)arr[0][i] = arr[1][i] = arr[2][i] = arr[3][i] = arr[4][i] = (parseInt(lv / 20) + 1) * i;
+        for (let i = 0; i < 8; i++)arr[5][i] = arr[6][i] = arr[7][i] = arr[8][i] = arr[9][i] = (parseInt(lv / 40) + 1) * i;
     
-    // clg = () => {
-    //     console.log(this.state.addop_arr);
-    // }
+        //	for(i=0;i<10;i++,puts(""))
+        //		for(j=0;j<8;j++)printf("%d ",arr[i][j]);
+    }
+
+    make_pick = () => {
+        const nn = 10;
+        const scn = 4 - this.stat_gaesu;
+        let {v,tempVector} = this;
+        // printf("%d %d\n",nn,scn);
+        console.log(`${nn} ${scn}`);
+        for (let i = 0; i < nn; i++)v.push(i);
+        for (let i = 0; i < scn; i++)tempVector.push(1);
+        for (let i = 0; i < nn - scn; i++)tempVector.push(0);
+        // sort(tempVector.begin(), tempVector.end());
+        tempVector.sort();
+    }
 
     cal_stat1 = () => {
         let {tempVector ,check_st,v,arr2,s_case,arr,mmap} = this;
         let {lv,check_fire,stat_arr} = this.state;
+        let tarr = [];
         do {
             for (var i = 0; i < tempVector.length; i++) {
                 if (tempVector[i] == 1) check_st.push(v[i]);
@@ -308,6 +305,27 @@ class AddOp extends Component{
         }
     }
 
+    createDivWrap = (props) => {
+        let temp = [];
+        let ret = [];
+        const {stat} = this;
+        const {idx} = props;
+        for(let i=0;i<13;i++){
+            temp.push(
+                <div className="div_wrap">
+                <div className="form_label">{stat[i]}</div>
+                <input value={this.state.stat_arr[i]} onChange={this.handleChange} name={i}/>
+            </div>
+            )
+        }
+        for(let i=0;i<13;i++)ret.push(temp[i]);
+        return(
+            <>
+            {ret}
+            </>
+        )
+    }
+
     inputAddOp = () => {
         return(
             <div className="div_form_op">
@@ -323,84 +341,83 @@ class AddOp extends Component{
                         </select>
                     </div>
                 <form className="div_test_op">
-                    <div className="div_wrap">                    
-                        <div className="form_label">STR</div>
-                        <input value={this.state.stat_arr[0]} onChange={this.handleChange} name='0'/>
-                    </div>
-                    <div className="div_wrap">
-                        <div className="form_label">DEX</div>
-                        <input value={this.state.stat_arr[1]} onChange={this.handleChange} name='1'/>                    
-                    </div>
-                    <div className="div_wrap">
-                        <div className="form_label">INK</div>
-                        <input value={this.state.stat_arr[2]} onChange={this.handleChange} name='2'/>
-                    </div>
-                    <div className="div_wrap">
-                        <div className="form_label">LUK</div>
-                        <input value={this.state.stat_arr[3]} onChange={this.handleChange} name='3'/>
-                    </div>
-                    <div className="div_wrap">
-                        <div className="form_label">최대 HP</div>
-                        <input value={this.state.stat_arr[4]} onChange={this.handleChange} name='4'/>
-                    </div>
-                    <div className="div_wrap">
-                        <div className="form_label">최대 MP </div>
-                    <input value={this.state.stat_arr[5]} onChange={this.handleChange} name='5'/>
-                    </div>
-                    <div className="div_wrap">
-                        <div className="form_label">공격력</div>
-                        <input value={this.state.stat_arr[6]} onChange={this.handleChange} name='6'/>
-                    </div>
-                    <div className="div_wrap">
-                        <div className="form_label">마력</div>
-                        <input value={this.state.stat_arr[7]} onChange={this.handleChange} name='7'/>
-                    </div>
-
-                    <div className="div_wrap">
-                        <div className="form_label">방어력</div>
-                        <input value={this.state.stat_arr[8]} onChange={this.handleChange} name='8'/>
-                    </div>
-                    <div className="div_wrap">
-                        <div className="form_label">이동속도</div>
-                        <input value={this.state.stat_arr[9]} onChange={this.handleChange} name='9'/>
-                    </div>
-                    <div className="div_wrap">
-                        <div className="form_label">점프력</div>
-                        <input value={this.state.stat_arr[10]} onChange={this.handleChange} name='10'/>
-                    </div>
-                    <div className="div_wrap">
-                        <div className="form_label">올스탯</div>
-                        <input value={this.state.stat_arr[11]} onChange={this.handleChange} name='11'/>
-                    </div>
-                    <div className="div_wrap">
-                        <div className="form_label">착용레벨 감소</div>
-                        <input value={this.state.stat_arr[12]} onChange={this.handleChange} name='12'/>
-                    </div>
+                    <this.createDivWrap/>
                     <button onClick={this.handleSubmit} className='submit_bt2'>등록</button>                    
                 </form>
             </div>
         )
     }
     
+    createDiv = () => {
+        let tmp_arr= [];
+        for(var i=7;i!=0;i--)tmp_arr.push(<div className="const_op">{i}추옵</div>)
+        return(
+            <>
+                {tmp_arr}
+            </>
+        );
+    }
+
+    calcStaticAddOp = (props) => {
+        let tmp_arr = [];
+        console.log(props.lv,props.sorm);
+        for(var i=1;i<8;i++){
+            tmp_arr.push(<div className="const_op_stat">{parseInt(props.lv/props.sorm+1)*i}</div>)
+        }
+        return(
+            <>
+                {tmp_arr}
+            </>
+        )
+    }
+    
+    createConstOpForm = (props) => {
+        return(
+            <div className="const_op_form">
+                <div className="const_op">{props.lv}</div>
+                <this.createDiv/>
+                <div className="const_op">단일추옵</div>
+                <this.calcStaticAddOp lv={props.llv} sorm={20}/>
+                <div className="const_op">이중추옵</div>
+                <this.calcStaticAddOp lv={props.llv} sorm={40}/>
+            </div>
+        )
+    }
+
+    floatingStat = () => {
+        return(
+            <div className="view_const_stat">
+                <this.createConstOpForm lv="140~150제" llv="140"/>
+                <this.createConstOpForm lv="160제" llv="160"/>
+                <this.createConstOpForm lv="200제" llv="200"/>
+            </div>
+        )
+    }
+    viewAddOp = () => {
+        const {addop_sol} = this.state;
+        let arr = [];
+        for(let i=0;i<addop_sol.length;i++)arr.push(<div className="view_add_op">{addop_sol[i]},</div>);
+        return(
+            <>
+                {arr}
+            </>
+        )
+    }
+    // viewFloatingAddOp = () => {
+    //     return()
+    // }
 
     render(){
-        
+        const {addop_arr} = this.state;
         return(
             <>
                 <this.inputAddOp/>
-                {/* <div>{this.state.stat_arr[0]}</div>
-                <div>{this.state.stat_arr[1]}</div>
-                <div>{this.state.stat_arr[2]}</div>
-                <div>{this.state.stat_arr[3]}</div>
-                <div>{this.state.stat_arr[4]}</div>
-                <div>{this.state.stat_arr[5]}</div>
-                <div>{this.state.stat_arr[6]}</div>
-                <div>{this.state.stat_arr[7]}</div>
-                <div>{this.state.stat_arr[8]}</div>
-                <div>{this.state.stat_arr[9]}</div>
-                <div>{this.state.stat_arr[10]}</div>
-                <div>{this.state.stat_arr[11]}</div>
-                <div>{this.state.stat_arr[12]}</div> */}
+                <div className="view_stat">
+                    <this.viewAddOp/>
+                </div>
+                <this.floatingStat/>
+                {/* <div className="view_stat">{this.floatingStat}</div> */}
+                
             </>
         );
     }
