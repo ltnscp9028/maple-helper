@@ -46,7 +46,7 @@ class AddOp extends React.Component{
         for (var i = 4; i < 13; i++)if(stat_arr[i]!=0)this.stat_gaesu++;
         this.set_addop();
         this.make_pick();
-        console.log(stat_arr);
+        // console.log(stat_arr);
         if(this.stat_gaesu==0)this.cal_stat1();
         if(this.stat_gaesu==1)this.cal_stat2();
         if(this.stat_gaesu==2)this.cal_stat3();
@@ -86,7 +86,7 @@ class AddOp extends React.Component{
         const scn = 4 - this.stat_gaesu;
         let {v,tempVector} = this;
         // printf("%d %d\n",nn,scn);
-        console.log(`${nn} ${scn}`);
+        // console.log(`${nn} ${scn}`);
         for (let i = 0; i < nn; i++)v.push(i);
         for (let i = 0; i < scn; i++)tempVector.push(1);
         for (let i = 0; i < nn - scn; i++)tempVector.push(0);
