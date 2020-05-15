@@ -94,6 +94,71 @@ class AddOp extends React.Component{
         tempVector.sort();
     }
 
+    next_permutation = () => {
+        let {tempVector} = this;
+        var idx = -1;
+        for(var i=0;i<9;i++)
+            if(tempVector[i]<tempVector[i+1])idx=i;
+        if(idx<0)return 0;
+        for(i=9;i>idx;i--){
+            if(tempVector[idx] <tempVector[i]){
+                var tmp = tempVector[idx];
+                tempVector[idx] = tempVector[i];
+                tempVector[i] = tmp;
+                break;
+            }
+        }
+        for(i=idx+1;i<(11+idx)/2 ; i++){
+            tmp = tempVector[i];
+            tempVector[i] = tempVector[10 - (i-idx)];
+            tempVector[10 - (i-idx)] = tmp;
+        }
+        return 1;
+    }
+
+    s_case = (restat, n, ww) => {
+        const {check_st,arr} = this;
+        //str = 0,  dex = 1, luk = 2, int = 3 , str+dex = 4 , str+int = 5, str+luk = 6 ,  dex + int = 7 ,  dex _ luk = 8, int + luk = 9
+        switch (check_st[n]) {
+            case 0:
+                restat.restr += arr[check_st[n]][ww];
+                break;
+            case 1:
+                restat.redex += arr[check_st[n]][ww];
+                break;
+            case 2:
+                restat.reluk += arr[check_st[n]][ww];
+                break;
+            case 3:
+                restat.reint += arr[check_st[n]][ww];
+                break;
+            case 4:
+                restat.restr += arr[check_st[n]][ww];
+                restat.redex += arr[check_st[n]][ww];
+                break;
+            case 5:
+                restat.restr += arr[check_st[n]][ww];
+                restat.reint += arr[check_st[n]][ww];
+                break;
+            case 6:
+                restat.restr += arr[check_st[n]][ww];
+                restat.reluk += arr[check_st[n]][ww];
+                break;
+            case 7:
+                restat.redex += arr[check_st[n]][ww];
+                restat.reint += arr[check_st[n]][ww];
+                break;
+            case 8:
+                restat.redex += arr[check_st[n]][ww];
+                restat.reluk += arr[check_st[n]][ww];
+                break;
+            case 9:
+                restat.reint += arr[check_st[n]][ww];
+                restat.reluk += arr[check_st[n]][ww];
+                break;
+        }
+    }   
+
     cal_stat1 = () => {
         let {tempVector ,check_st,v,arr2,s_case,arr,mmap} = this;
         let {lv,check_fire,stat_arr} = this.state;
@@ -240,70 +305,9 @@ class AddOp extends React.Component{
         } while (this.next_permutation());
     }
 
-    next_permutation = () => {
-        let {tempVector} = this;
-        var idx = -1;
-        for(var i=0;i<9;i++)
-            if(tempVector[i]<tempVector[i+1])idx=i;
-        if(idx<0)return 0;
-        for(i=9;i>idx;i--){
-            if(tempVector[idx] <tempVector[i]){
-                var tmp = tempVector[idx];
-                tempVector[idx] = tempVector[i];
-                tempVector[i] = tmp;
-                break;
-            }
-        }
-        for(i=idx+1;i<(11+idx)/2 ; i++){
-            tmp = tempVector[i];
-            tempVector[i] = tempVector[10 - (i-idx)];
-            tempVector[10 - (i-idx)] = tmp;
-        }
-        return 1;
-    }
 
-    s_case = (restat, n, ww) => {
-        const {check_st,arr} = this;
-        //str = 0,  dex = 1, luk = 2, int = 3 , str+dex = 4 , str+int = 5, str+luk = 6 ,  dex + int = 7 ,  dex _ luk = 8, int + luk = 9
-        switch (check_st[n]) {
-            case 0:
-                restat.restr += arr[check_st[n]][ww];
-                break;
-            case 1:
-                restat.redex += arr[check_st[n]][ww];
-                break;
-            case 2:
-                restat.reluk += arr[check_st[n]][ww];
-                break;
-            case 3:
-                restat.reint += arr[check_st[n]][ww];
-                break;
-            case 4:
-                restat.restr += arr[check_st[n]][ww];
-                restat.redex += arr[check_st[n]][ww];
-                break;
-            case 5:
-                restat.restr += arr[check_st[n]][ww];
-                restat.reint += arr[check_st[n]][ww];
-                break;
-            case 6:
-                restat.restr += arr[check_st[n]][ww];
-                restat.reluk += arr[check_st[n]][ww];
-                break;
-            case 7:
-                restat.redex += arr[check_st[n]][ww];
-                restat.reint += arr[check_st[n]][ww];
-                break;
-            case 8:
-                restat.redex += arr[check_st[n]][ww];
-                restat.reluk += arr[check_st[n]][ww];
-                break;
-            case 9:
-                restat.reint += arr[check_st[n]][ww];
-                restat.reluk += arr[check_st[n]][ww];
-                break;
-        }
-    }
+
+
 
     createDivWrap = (props) => {
         let temp = [];
@@ -369,8 +373,8 @@ class AddOp extends React.Component{
                 {tmp_arr}
             </>
         )
-    }
-    
+    }    
+
     createConstOpForm = (props) => {
         return(
             <div className="const_op_form">
@@ -383,7 +387,6 @@ class AddOp extends React.Component{
             </div>
         )
     }
-
     floatingStat = () => {
         return(
             <div className="view_const_stat">
@@ -393,6 +396,10 @@ class AddOp extends React.Component{
             </div>
         )
     }
+
+
+
+
     viewAddOp = () => {
         const {addop_sol} = this.state;
         let arr = [];
@@ -418,9 +425,9 @@ class AddOp extends React.Component{
             <>
                 <this.inputAddOp/>
                 <div className="view_stat">
-                    <this.viewAddOp/>
+                    {/* <this.viewAddOp/> */}
                 </div>
-                <this.floatingStat/>
+                {/* <this.floatingStat/> */}
                 {/* <div className="view_stat">{this.floatingStat}</div> */}
                 
             </>
