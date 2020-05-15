@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/maple-helper/precache-manifest.21cb9288c3603da247883d4abe53272d.js"
+  "/maple-helper/precache-manifest.a332402779d5598e55d595f472cae45a.js"
 );
 
 self.addEventListener('message', (event) => {
