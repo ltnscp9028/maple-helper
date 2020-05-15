@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "672116a793f0136f42945336cb2e0e9d",
+    "revision": "11d831b0386eb3fc4e84ca3adc7d4a0a",
     "url": "/maple-helper/index.html"
   },
   {
-    "revision": "319704385b0aa11da7d7",
+    "revision": "7c52d645e80c0d0dedb6",
     "url": "/maple-helper/static/css/main.23f5fc72.chunk.css"
   },
   {
-    "revision": "41dc0fedabfa8ce57950",
-    "url": "/maple-helper/static/js/2.53fe6580.chunk.js"
+    "revision": "add8ab8900c37b0f29cb",
+    "url": "/maple-helper/static/js/2.93225059.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/maple-helper/static/js/2.53fe6580.chunk.js.LICENSE.txt"
+    "url": "/maple-helper/static/js/2.93225059.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "319704385b0aa11da7d7",
-    "url": "/maple-helper/static/js/main.49f32c53.chunk.js"
+    "revision": "7c52d645e80c0d0dedb6",
+    "url": "/maple-helper/static/js/main.3f22217f.chunk.js"
   },
   {
     "revision": "75d39103eff29dedb6bb",

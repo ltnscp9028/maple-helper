@@ -8,8 +8,7 @@ class AddOp extends Component{
     tempVector = [];
     v = [];
     check_st = [];
-    lv=150;
-    j=0; chk=0; fire_yn=0; stat_gaesu=0;
+    j=0; chk=0; fire_yn=0; stat_gaesu=0; id=0;
     mmap = new Set();
     arr2 = ["STR","DEX","LUK","INT","STR+DEX","STR+INT","STR+LUK","DEX+INT","DEX+LUK","INT+LUK"];
     stat= ["str","dex","int","luk",
@@ -21,6 +20,7 @@ class AddOp extends Component{
         stat_arr: [0,0,0,0,0,0,0,0,0,0,0,0,0],
         lv:'',
         check_fire:'',
+        addop_arr : []
     }
 
     handleChange = (e) => {
@@ -62,7 +62,9 @@ class AddOp extends Component{
     }
 
     handleSubmit = (e) => {
-        let {stat_arr} = this.state;
+        let {stat_arr,addop_arr} = this.state;
+        let {mmap,id} = this;
+        let temp_arr = [];
         e.preventDefault();
         for (var i = 4; i < 13; i++)if(stat_arr[i]!=0)this.stat_gaesu++;
         this.set_addop();
@@ -72,15 +74,29 @@ class AddOp extends Component{
         if(this.stat_gaesu==1)this.cal_stat2();
         if(this.stat_gaesu==2)this.cal_stat3();
         if(this.stat_gaesu==3)this.cal_stat4();
-        console.log(this.mmap);
+        mmap.forEach((value)=>temp_arr.push(value));
         this.setState({
+            addop_arr: addop_arr.concat({
+                id:id++,
+                ad_opop:temp_arr
+            }),
+
             stat_arr: [0,0,0,0,0,0,0,0,0,0,0,0,0],
             lv:'',
             check_fire:'',
+            
         })
+        console.log(mmap);
+        mmap.clear();
+        this.stat_gaesu = 0;
+        this.tempVector = [];
+        this.check_st = [];
+        this.v = [];
     }
     
-    
+    // clg = () => {
+    //     console.log(this.state.addop_arr);
+    // }
 
     cal_stat1 = () => {
         let {tempVector ,check_st,v,arr2,s_case,arr,mmap} = this;
