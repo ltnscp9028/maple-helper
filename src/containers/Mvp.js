@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React from 'react';
 import './Mvp.css';
 import AddInfoList from '../components/mvp/AddInfoList';
