@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/maple-helper/static/css/main.7a6738e4.chunk.css",
-    "main.js": "/maple-helper/static/js/main.2f2de13e.chunk.js",
-    "main.js.map": "/maple-helper/static/js/main.2f2de13e.chunk.js.map",
+    "main.js": "/maple-helper/static/js/main.b1858291.chunk.js",
+    "main.js.map": "/maple-helper/static/js/main.b1858291.chunk.js.map",
     "runtime-main.js": "/maple-helper/static/js/runtime-main.52a660da.js",
     "runtime-main.js.map": "/maple-helper/static/js/runtime-main.52a660da.js.map",
     "static/js/2.93225059.chunk.js": "/maple-helper/static/js/2.93225059.chunk.js",
     "static/js/2.93225059.chunk.js.map": "/maple-helper/static/js/2.93225059.chunk.js.map",
     "index.html": "/maple-helper/index.html",
-    "precache-manifest.d3367f519eb7e757b9f079585bfa6f35.js": "/maple-helper/precache-manifest.d3367f519eb7e757b9f079585bfa6f35.js",
+    "precache-manifest.85ee47a4a97a15fa0451bd2633aef81c.js": "/maple-helper/precache-manifest.85ee47a4a97a15fa0451bd2633aef81c.js",
     "service-worker.js": "/maple-helper/service-worker.js",
     "static/css/main.7a6738e4.chunk.css.map": "/maple-helper/static/css/main.7a6738e4.chunk.css.map",
     "static/js/2.93225059.chunk.js.LICENSE.txt": "/maple-helper/static/js/2.93225059.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.52a660da.js",
     "static/js/2.93225059.chunk.js",
     "static/css/main.7a6738e4.chunk.css",
-    "static/js/main.2f2de13e.chunk.js"
+    "static/js/main.b1858291.chunk.js"
   ]
 }
