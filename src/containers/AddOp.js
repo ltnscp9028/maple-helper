@@ -345,7 +345,7 @@ class AddOp extends React.Component{
                         </select>
                     </div>
                 <form className="div_test_op">
-                    <this.createDivWrap/>
+                    {/* <this.createDivWrap/> */}
                     <button onClick={this.handleSubmit} className='submit_bt2'>등록</button>                    
                 </form>
             </div>
@@ -423,11 +423,11 @@ class AddOp extends React.Component{
     render(){
         return(
             <>
-                {/* <this.inputAddOp/> */}
+                <this.inputAddOp/>
                 <div className="view_stat">
                     <this.viewAddOp/>
                 </div>
-                <this.floatingStat/>
+                {/* <this.floatingStat/> */}
                 {/* <div className="view_stat">{this.floatingStat}</div> */}
                 
             </>
