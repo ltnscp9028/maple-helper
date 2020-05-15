@@ -1,8 +1,8 @@
 /*eslint-disable */
-import React,{Component} from 'react';
+import React from 'react';
 import './AddOp.css';
 
-class AddOp extends Component{
+class AddOp extends React.Component{
     arr = Array(10).fill(null).map(() => Array(8));
     tempVector = [];
     v = [];
@@ -63,7 +63,7 @@ class AddOp extends Component{
             check_fire:'',
             addop_sol:temp_arr
         })
-        console.log(mmap);
+        // console.log(mmap);
         mmap.clear();
         this.stat_gaesu = 0;
         this.tempVector = [];
@@ -360,7 +360,7 @@ class AddOp extends Component{
 
     calcStaticAddOp = (props) => {
         let tmp_arr = [];
-        console.log(props.lv,props.sorm);
+        // console.log(props.lv,props.sorm);
         for(var i=1;i<8;i++){
             tmp_arr.push(<div className="const_op_stat">{parseInt(props.lv/props.sorm+1)*i}</div>)
         }
@@ -414,7 +414,6 @@ class AddOp extends Component{
     // }
 
     render(){
-        const {addop_arr} = this.state;
         return(
             <>
                 <this.inputAddOp/>
