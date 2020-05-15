@@ -73,6 +73,11 @@ class AddOp extends Component{
         if(this.stat_gaesu==2)this.cal_stat3();
         if(this.stat_gaesu==3)this.cal_stat4();
         console.log(this.mmap);
+        this.setState({
+            stat_arr: [0,0,0,0,0,0,0,0,0,0,0,0,0],
+            lv:'',
+            check_fire:'',
+        })
     }
     
     
