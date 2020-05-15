@@ -309,11 +309,10 @@ class AddOp extends React.Component{
 
 
 
-    createDivWrap = (props) => {
+    createDivWrap = () => {
         let temp = [];
         let ret = [];
-        const {stat} = this;
-        const {idx} = props;
+        const stat = this.stat;
         for(let i=0;i<13;i++){
             temp.push(
                 <div className="div_wrap">
@@ -345,7 +344,7 @@ class AddOp extends React.Component{
                         </select>
                     </div>
                 <form className="div_test_op">
-                    {/* <this.createDivWrap/> */}
+                    <this.createDivWrap/>
                     <button onClick={this.handleSubmit} className='submit_bt2'>등록</button>                    
                 </form>
             </div>
