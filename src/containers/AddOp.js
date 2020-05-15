@@ -118,10 +118,10 @@ class AddOp extends Component{
                                 if (check_fire==1 && (q==7 ||w==7 ||e==7||r==7 || q<3 ||w<3 ||e<3 || r< 3)) continue;
                                 if (check_fire==2 && (q<4||w<4||e<4||r<4)) continue;
                                 var p='';
-                                if (arr[check_st[0]][q]) p = `${arr2[check_st[0]]} ${8 - q}추옵(${arr[check_st[0]][q]}) `;
-                                if (arr[check_st[1]][w]) p += `${arr2[check_st[1]]} ${8 - w}추옵(${arr[check_st[1]][w]}) `;
-                                if (arr[check_st[2]][e]) p += `${arr2[check_st[2]]} ${8 - e}추옵(${arr[check_st[2]][e]}) `;
-                                if (arr[check_st[3]][r]) p += `${arr2[check_st[3]]} ${8 - r}추옵(${arr[check_st[3]][r]}) `;
+                                if (arr[check_st[0]][q]) p = `${arr2[check_st[0]]} ${8 - q}추옵(${arr[check_st[0]][q]}),`;
+                                if (arr[check_st[1]][w]) p += `${arr2[check_st[1]]} ${8 - w}추옵(${arr[check_st[1]][w]}),`;
+                                if (arr[check_st[2]][e]) p += `${arr2[check_st[2]]} ${8 - e}추옵(${arr[check_st[2]][e]}),`;
+                                if (arr[check_st[3]][r]) p += `${arr2[check_st[3]]} ${8 - r}추옵(${arr[check_st[3]][r]})`;
                                 mmap.add(p);
                             }
                         }
@@ -396,7 +396,13 @@ class AddOp extends Component{
     viewAddOp = () => {
         const {addop_sol} = this.state;
         let arr = [];
-        for(let i=0;i<addop_sol.length;i++)arr.push(<div className="view_add_op">{addop_sol[i]},</div>);
+        for(let i=0;i<addop_sol.length;i++){
+            let tparr = addop_sol[i].split(',');
+            for(let j=0;j<tparr.length;j++){
+                arr.push(<div>{tparr[j]}</div>);
+            }
+            arr.push("_________________");
+        }
         return(
             <>
                 {arr}
