@@ -14,7 +14,16 @@ class AddOp extends React.Component{
     "최대 HP", "최대 MP",
     "공격력", "마력",
     "방어력","이동속도", "점프력","올스탯","착용레벨 감소"];
- 
+    constructor(props) {
+        super(props);
+        this.inputAddOp = this.inputAddOp.bind(this);
+        this.createDivWrap = this.createDivWrap.bind(this);
+        this.createDiv = this.createDiv.bind(this);
+        this.floatingStat = this.floatingStat.bind(this);
+        this.calcStaticAddOp = this.calcStaticAddOp.bind(this);
+        this.createConstOpForm = this.createConstOpForm.bind(this);
+      }
+
     state = {
         stat_arr: [0,0,0,0,0,0,0,0,0,0,0,0,0],
         lv:'',
@@ -305,11 +314,7 @@ class AddOp extends React.Component{
         } while (this.next_permutation());
     }
 
-
-
-
-
-    createDivWrap = () => {
+    createDivWrap(){
         let temp = [];
         let ret = [];
         const stat = this.stat;
@@ -329,7 +334,7 @@ class AddOp extends React.Component{
         )
     }
 
-    inputAddOp = () => {
+    inputAddOp(){
         return(
             <div className="div_form_op">
                     <div className="div_wrap_def">                    
@@ -351,7 +356,7 @@ class AddOp extends React.Component{
         )
     }
     
-    createDiv = () => {
+    createDiv(){
         let tmp_arr= [];
         for(var i=7;i!=0;i--)tmp_arr.push(<div className="const_op">{i}추옵</div>)
         return(
@@ -361,7 +366,7 @@ class AddOp extends React.Component{
         );
     }
 
-    calcStaticAddOp = (props) => {
+    calcStaticAddOp(props){
         let tmp_arr = [];
         // console.log(props.lv,props.sorm);
         for(var i=1;i<8;i++){
@@ -374,7 +379,7 @@ class AddOp extends React.Component{
         )
     }    
 
-    createConstOpForm = (props) => {
+    createConstOpForm(props){
         return(
             <div className="const_op_form">
                 <div className="const_op">{props.lv}</div>
@@ -386,7 +391,7 @@ class AddOp extends React.Component{
             </div>
         )
     }
-    floatingStat = () => {
+    floatingStat(){
         return(
             <div className="view_const_stat">
                 <this.createConstOpForm lv="140~150제" llv="140"/>
@@ -426,7 +431,7 @@ class AddOp extends React.Component{
                 <div className="view_stat">
                     <this.viewAddOp/>
                 </div>
-                {/* <this.floatingStat/> */}
+                <this.floatingStat/>
                 {/* <div className="view_stat">{this.floatingStat}</div> */}
                 
             </>
