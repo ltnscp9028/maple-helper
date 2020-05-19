@@ -174,3 +174,14 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.view_div{
+	border: 1px solid #4D4D4D;
+	width: 265px;
+	margin-top: 10px;
+
+}
+
+.view_value{
+	margin: 5px 0px 5px 10px;
+}
