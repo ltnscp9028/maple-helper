@@ -33,7 +33,7 @@ class AddOp extends React.Component {
     state = {
         stat_arr: Array(16).fill(0),
         lv: '',
-        check_fire: '',
+        check_fire: 0,
         addop_arr: [],
         addop_sol: '',
     }
@@ -59,28 +59,24 @@ class AddOp extends React.Component {
         let temp_arr = [];
         e.preventDefault();
         for (let i = 4; i < this.stat.length; i++)if (stat_arr[i] != 0 && i != 6) this.stat_gaesu++;
+        console.log('check_fire : ' + this.state.check_fire, 'stat_gaesu : ' + this.stat_gaesu);
         this.set_addop();
         this.make_pick();
         // console.log(stat_arr);
-        // if (this.stat_gaesu == 0) this.cal_stat1();
-        // if (this.stat_gaesu == 1) this.cal_stat2();
-        // if (this.stat_gaesu == 2) this.cal_stat3();
-        // if (this.stat_gaesu == 3) this.cal_stat4();
-        console.log(this.stat_gaesu + 1);
-        this[`cal_stat${this.stat_gaesu + 1}`]();
+        // console.log(this.stat_gaesu + 1);
+        this.cal_stat(4 - this.stat_gaesu);
         mmap.forEach(value => temp_arr.push(value));
-        // this.calcGM();
-        this.calcGM();
         this.setState({
             addop_arr: addop_arr.concat({
                 id: id++,
                 ad_opop: temp_arr,
             }),
-            stat_arr: Array(13).fill(0),
+            stat_arr: Array(16).fill(0),
             lv: '',
             check_fire: '',
             addop_sol: temp_arr,
         })
+        console.log('test');
         // console.log(mmap);
         mmap.clear();
         this.stat_gaesu = 0;
@@ -97,7 +93,7 @@ class AddOp extends React.Component {
             arr[0][i] = arr[1][i] = arr[2][i] = arr[3][i] = arr[4][i] = (parseInt(lv / 20) + 1) * i;
             arr[5][i] = arr[6][i] = arr[7][i] = arr[8][i] = arr[9][i] = (parseInt(lv / 40) + 1) * i;
         }
-        console.log(arr);
+        // console.log(arr);
     }
 
     make_pick = () => {
@@ -154,126 +150,66 @@ class AddOp extends React.Component {
         }
     }
 
-    cal_stat1 = () => {
-        let { tempVector, check_st, v, arr2, s_case, arr, mmap } = this;
-        let { lv, check_fire, stat_arr } = this.state;
+    cal_stat_func = (qwer) => {
+        const { arr2, s_case, arr, mmap, check_st } = this;
+        const { lv, check_fire, stat_arr } = this.state;
+        //str = 0,  dex = 1, luk = 2, int = 3 , str+dex = 4 , str+int = 5, str+luk = 6 ,  dex + int = 7 ,  dex _ luk = 8, int + luk = 9
+        let restat = { restr: 0, redex: 0, reluk: 0, reint: 0 };
+        for (let ii = 0; ii < qwer.length; ii++)s_case(restat, ii, qwer[ii]);
+        if (restat.restr == stat_arr[0] && restat.redex == stat_arr[1] && restat.reint == stat_arr[2] && restat.reluk == stat_arr[3]) {
+            for (let jj = 0; jj < qwer.length; jj++)if (qwer[jj] < 3 && lv >= 150) return 0;
+            if (check_fire == 1) {
+                for (let jj = 0; jj < qwer.length; jj++)if (qwer[jj] == 7 || qwer[jj] < 3) return 0;
+            }
+            if (check_fire == 2) {
+                for (let jj = 0; jj < qwer.length; jj++)if (qwer[jj] < 4) return 0;
+            }
+            let p = '';
+            for (let ii = 0; ii < qwer.length; ii++) {
+                if (arr[check_st[ii]][qwer[ii]]) p += `${arr2[check_st[ii]]} ${8 - qwer[ii]}추옵(${arr[check_st[ii]][qwer[ii]]}),`;
+            }
+            // console.log("test");
+            mmap.add(p);
+        }
+        // return true;
+    }
+
+    cal_stat = (len) => {
+        const { tempVector, check_st, v } = this;
+        console.log(`len : ${len}, stat_gaesu : ${this.stat_gaesu}`);
         do {
             for (let i = 0; i < tempVector.length; i++) {
                 if (tempVector[i] == 1) check_st.push(v[i]);
             }
             for (let q = 0; q < 8; q++) {
-                for (let w = 0; w < 8; w++) {
-                    for (let e = 0; e < 8; e++) {
-                        for (let r = 0; r < 8; r++) {
-                            let qwer = [q, w, e, r];
-                            //str = 0,  dex = 1, luk = 2, int = 3 , str+dex = 4 , str+int = 5, str+luk = 6 ,  dex + int = 7 ,  dex _ luk = 8, int + luk = 9
-                            let restat = { restr: 0, redex: 0, reluk: 0, reint: 0 };
-                            for (let ii = 0; ii < qwer.length; ii++)s_case(restat, ii, qwer[ii]);
-                            if (restat.restr == stat_arr[0] && restat.redex == stat_arr[1] && restat.reint == stat_arr[2] && restat.reluk == stat_arr[3]) {
-                                if ((q < 3 || w < 3 || e < 3 || r < 3) && (lv >= 150)) continue;
-                                if (check_fire == 1 && (q == 7 || w == 7 || e == 7 || r == 7 || q < 3 || w < 3 || e < 3 || r < 3)) continue;
-                                if (check_fire == 2 && (q < 4 || w < 4 || e < 4 || r < 4)) continue;
-                                let p = '';
-                                for (let ii = 0; ii < qwer.length; ii++) {
-                                    if (arr[check_st[ii]][qwer[ii]]) p += `${arr2[check_st[ii]]} ${8 - qwer[ii]}추옵(${arr[check_st[ii]][qwer[ii]]}),`
+                if (len > 1) {
+                    for (let w = 0; w < 8; w++) {
+                        if (len > 2) {
+                            for (let e = 0; e < 8; e++) {
+                                if (len > 3) {
+                                    for (let r = 0; r < 8; r++) {
+                                        // console.log([q, w, e, r]);
+                                        if (this.cal_stat_func([q, w, e, r]) == 0) {
+                                            // console.log(qwer);
+                                            continue;
+                                        }
+                                    }
                                 }
-                                mmap.add(p);
+                                else {
+                                    if (this.cal_stat_func([q, w, e]) == 0) continue;
+                                }
                             }
                         }
-                    }
-                }
-            }
-            check_st.length = 0;
-        } while (nq.next_permutation(tempVector));
-    }
-
-    cal_stat2 = () => {
-        let { tempVector, check_st, v, arr2, s_case, arr, mmap } = this;
-        let { lv, check_fire, stat_arr } = this.state;
-        do {
-            for (let i = 0; i < tempVector.length; i++) {
-                if (tempVector[i] == 1) check_st.push(v[i]);
-            }
-            // console.log(check_st);
-            for (let q = 0; q < 8; q++) {
-                for (let w = 0; w < 8; w++) {
-                    for (let e = 0; e < 8; e++) {
-                        let qwer = [q, w, e];
-                        //str = 0,  dex = 1, luk = 2, int = 3 , str+dex = 4 , str+int = 5, str+luk = 6 ,  dex + int = 7 ,  dex _ luk = 8, int + luk = 9
-                        let restat = { restr: 0, redex: 0, reluk: 0, reint: 0 };
-                        for (let ii = 0; ii < qwer.length; ii++)s_case(restat, ii, qwer[ii]);
-                        if (restat.restr == stat_arr[0] && restat.redex == stat_arr[1] && restat.reint == stat_arr[2] && restat.reluk == stat_arr[3]) {
-                            if ((q < 3 || w < 3 || e < 3) && (lv >= 150)) continue;
-                            if (check_fire == 1 && (q == 7 || w == 7 || e == 7 || q < 3 || w < 3 || e < 3)) continue;
-                            if (check_fire == 2 && (q < 4 || w < 4 || e < 4)) continue;
-                            let p = '';
-                            for (let ii = 0; ii < qwer.length; ii++)
-                                if (arr[check_st[ii]][qwer[ii]]) p += `${arr2[check_st[ii]]} ${8 - qwer[ii]}추옵(${arr[check_st[ii]][qwer[ii]]}) `
-                            mmap.add(p);
+                        else {
+                            if (!this.cal_stat_func([q, w]) == 0) continue;
                         }
                     }
-
-                    //						cout<<arr2[check_st[0]] + ' '<<arr2[check_st[1]] + ' ' << arr2[check_st[2]] + ' '<<arr2[check_st[3]]<<'\n';
-                    // chk++;
                 }
-                //					puts("---------------------------------------");
-            }
-            check_st.length = 0;
-            //    puts("test");
-        } while (nq.next_permutation(tempVector));
-    }
-
-
-    cal_stat3 = () => {
-        let { tempVector, check_st, v, arr2, s_case, arr, mmap } = this;
-        let { lv, check_fire, stat_arr } = this.state;
-        do {
-            for (let i = 0; i < tempVector.length; i++) {
-                if (tempVector[i] == 1) check_st.push(v[i]);
-            }
-            // console.log(check_st);
-            for (let q = 0; q < 8; q++) {
-                for (let w = 0; w < 8; w++) {
-                    //str = 0,  dex = 1, luk = 2, int = 3 , str+dex = 4 , str+int = 5, str+luk = 6 ,  dex + int = 7 ,  dex _ luk = 8, int + luk = 9
-                    let qwer = [q, w];
-                    let restat = { restr: 0, redex: 0, reluk: 0, reint: 0 };
-                    for (let ii = 0; ii < qwer.length; ii++)s_case(restat, ii, qwer[ii]);
-                    if (restat.restr == stat_arr[0] && restat.redex == stat_arr[1] && restat.reint == stat_arr[2] && restat.reluk == stat_arr[3]) {
-                        if ((q < 3 || w < 3) && (lv >= 150)) continue;
-                        if (check_fire == 1 && (q == 7 || w == 7 || q < 3 || w < 3)) continue;
-                        if (check_fire == 2 && (q < 4 || w < 4)) continue;
-                        let p = '';
-                        for (let ii = 0; ii < qwer.length; ii++)
-                            if (arr[check_st[ii]][qwer[ii]]) p += `${arr2[check_st[ii]]} ${8 - qwer[ii]}추옵(${arr[check_st[ii]][qwer[ii]]}) `
-                        mmap.add(p);
-                    }
+                else {
+                    if (!this.cal_stat_func([q]) == 0) continue;
                 }
             }
-            check_st.length = 0;
-        } while (nq.next_permutation(tempVector));
-    }
-
-    cal_stat4 = () => {
-        let { tempVector, check_st, v, arr2, s_case, arr, mmap } = this;
-        let { lv, check_fire, stat_arr } = this.state;
-        do {
-            for (let i = 0; i < tempVector.length; i++) {
-                if (tempVector[i] == 1) check_st.push(v[i]);
-            }
-            // console.log(check_st);
-            for (let q = 0; q < 8; q++) {
-                //str = 0,  dex = 1, luk = 2, int = 3 , str+dex = 4 , str+int = 5, str+luk = 6 ,  dex + int = 7 ,  dex _ luk = 8, int + luk = 9
-                let restat = { restr: 0, redex: 0, reluk: 0, reint: 0 };
-                s_case(restat, 0, q);
-                if (restat.restr == stat_arr[0] && restat.redex == stat_arr[1] && restat.reint == stat_arr[2] && restat.reluk == stat_arr[3]) {
-                    if ((q < 3) && (lv >= 150)) continue;
-                    if (check_fire == 1 && (q == 7 || q < 3)) continue;
-                    if (check_fire == 2 && (q < 4)) continue;
-                    let p = '';
-                    if (arr[check_st[0]][q]) p = `${arr2[check_st[0]]} ${8 - q}추옵(${arr[check_st[0]][q]}) `;
-                    mmap.add(p);
-                }
-            }
+            // console.log(this.mmap);
             check_st.length = 0;
         } while (nq.next_permutation(tempVector));
     }
@@ -288,8 +224,8 @@ class AddOp extends React.Component {
         const stat = this.stat;
         for (let i = 0; i < stat.length; i++) {
             temp.push(
-                <div className="div_wrap">
-                    <div className="form_label">{stat[i]}</div>
+                <div className="div_wrap" key={i}>
+                    <div className="form_label" key={i}>{stat[i]}</div>
                     <input value={this.state.stat_arr[i]} onChange={this.handleChange} name={i} />
                 </div>
             )
@@ -348,7 +284,7 @@ class AddOp extends React.Component {
             if (tmp_gong === tmp[i]) tmp_arr.push(tmp_gong);
             if (tmp_ma === tmp[i]) tmp_arr.push(tmp_ma);
         }
-        console.log(tmp_arr);
+        // console.log(tmp_arr);
     }
 
     render() {

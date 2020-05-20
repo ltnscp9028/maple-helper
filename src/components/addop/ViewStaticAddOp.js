@@ -9,13 +9,14 @@ class CalStaticAddOp extends React.Component {
         // console.log(props.lv,props.sorm);
         if (check === 1) {
             for (let i = 1; i < 8; i++) {
-                tmp_arr.push(<div className="const_op_stat">{parseInt(lv / sorm + 1) * i}</div>)
+                tmp_arr.push(<div className="const_op_stat" key={i}>{parseInt(lv / sorm + 1) * i}</div>)
             }
         }
         if (check === 2) {
             for (let i = 1; i < 8; i++) {
-                if (i < 3) tmp_arr.push(<div className="const_op_stat">X</div>)
-                else tmp_arr.push(<div className="const_op_stat">{lv === 150 ? fafnir[i - 3] : lv === 160 ? absol[i - 3] : arcanesh[i - 3]}%</div>)
+                if (i < 3) tmp_arr.push(<div className="const_op_stat" key={i}>X</div>)
+                else tmp_arr.push(<div className="const_op_stat" key={i}>
+                    {lv === 150 ? fafnir[i - 3] : lv === 160 ? absol[i - 3] : arcanesh[i - 3]}%</div>)
             }
         }
         return (

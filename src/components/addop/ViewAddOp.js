@@ -12,9 +12,9 @@ class ViewAddOp extends React.Component {
             let arr = [];
             let tparr = data[i].split(',');
             for (let j = 0; j < tparr.length; j++) {
-                arr.push(<div className="view_value">{tparr[j]}</div>);
+                arr.push(<div className="view_value" key={j}>{tparr[j]}</div>);
             }
-            view_arr.push(<div className="view_div">{arr}</div>);
+            view_arr.push(<div className="view_div" key={i}>{arr}</div>);
         }
 
 
