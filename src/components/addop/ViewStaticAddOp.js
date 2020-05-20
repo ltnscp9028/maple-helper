@@ -14,7 +14,7 @@ class CalStaticAddOp extends React.Component {
         }
         if (check === 2) {
             for (let i = 1; i < 8; i++) {
-                if (i < 4) tmp_arr.push(<div className="const_op_stat">X</div>)
+                if (i < 3) tmp_arr.push(<div className="const_op_stat">X</div>)
                 else tmp_arr.push(<div className="const_op_stat">{lv === 150 ? fafnir[i - 3] : lv === 160 ? absol[i - 3] : arcanesh[i - 3]}%</div>)
             }
         }

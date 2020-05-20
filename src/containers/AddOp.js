@@ -3,7 +3,7 @@ import React from 'react';
 import './AddOp.css';
 import ViewAddOp from '../components/addop/ViewAddOp';
 import CreateConstOpForm from '../components/addop/CreateConstOpForm';
-import CalcGongmaAddOp from '../components/addop/CalcGongmaAddOp';
+import CalcGongmaAddOp from '../components/addop/ViewGongmaAddOp';
 const nq = require('combination-js');
 class AddOp extends React.Component {
     arr = Array(10).fill(null).map(() => Array(8));
@@ -16,18 +16,22 @@ class AddOp extends React.Component {
     stat = [
         'STR', 'DEX', 'INT', 'LUK',
         '최대 HP', '최대 MP',
-        '공격력', '마력', '보공', '데미지',
+        '공/마 (기본)',
+        '공격력(추옵)', '마력(추옵)',
+        '보공', '데미지',
         '방어력', '이동속도', '점프력', '올스탯', '착용레벨 감소',
     ];
+
     constructor(props) {
         super(props);
         this.inputAddOp = this.inputAddOp.bind(this);
         this.createDivWrap = this.createDivWrap.bind(this);
         this.floatingStat = this.floatingStat.bind(this);
+        this.calcGM = this.calcGM.bind(this);
     }
 
     state = {
-        stat_arr: Array(15).fill(0),
+        stat_arr: Array(16).fill(0),
         lv: '',
         check_fire: '',
         addop_arr: [],
@@ -54,18 +58,24 @@ class AddOp extends React.Component {
         let { mmap, id } = this;
         let temp_arr = [];
         e.preventDefault();
-        for (let i = 4; i < 13; i++)if (stat_arr[i] != 0) this.stat_gaesu++;
+        for (let i = 4; i < this.stat.length; i++)if (stat_arr[i] != 0 && i != 6) this.stat_gaesu++;
         this.set_addop();
         this.make_pick();
         // console.log(stat_arr);
+        // if (this.stat_gaesu == 0) this.cal_stat1();
+        // if (this.stat_gaesu == 1) this.cal_stat2();
+        // if (this.stat_gaesu == 2) this.cal_stat3();
+        // if (this.stat_gaesu == 3) this.cal_stat4();
+        console.log(this.stat_gaesu + 1);
         this[`cal_stat${this.stat_gaesu + 1}`]();
         mmap.forEach(value => temp_arr.push(value));
+        // this.calcGM();
+        this.calcGM();
         this.setState({
             addop_arr: addop_arr.concat({
                 id: id++,
                 ad_opop: temp_arr,
             }),
-
             stat_arr: Array(13).fill(0),
             lv: '',
             check_fire: '',
@@ -83,9 +93,11 @@ class AddOp extends React.Component {
         const { lv } = this.state;
         let { arr } = this;
         for (let i = 0; i < 8; i++) {
+            // 7,8,12,13,14
             arr[0][i] = arr[1][i] = arr[2][i] = arr[3][i] = arr[4][i] = (parseInt(lv / 20) + 1) * i;
             arr[5][i] = arr[6][i] = arr[7][i] = arr[8][i] = arr[9][i] = (parseInt(lv / 40) + 1) * i;
         }
+        console.log(arr);
     }
 
     make_pick = () => {
@@ -196,7 +208,7 @@ class AddOp extends React.Component {
                             if (check_fire == 2 && (q < 4 || w < 4 || e < 4)) continue;
                             let p = '';
                             for (let ii = 0; ii < qwer.length; ii++)
-                                if (arr[check_st[ii]][qwer[ii]]) p += `${arr2[check_st[ii]]} ${8 - qwer[ii]}추옵(${arr[check_st[ii][qwer[ii]]]}) `
+                                if (arr[check_st[ii]][qwer[ii]]) p += `${arr2[check_st[ii]]} ${8 - qwer[ii]}추옵(${arr[check_st[ii]][qwer[ii]]}) `
                             mmap.add(p);
                         }
                     }
@@ -232,7 +244,7 @@ class AddOp extends React.Component {
                         if (check_fire == 2 && (q < 4 || w < 4)) continue;
                         let p = '';
                         for (let ii = 0; ii < qwer.length; ii++)
-                            if (arr[check_st[ii]][qwer[ii]]) p += `${arr2[check_st[ii]]} ${8 - qwer[ii]}추옵(${arr[check_st[ii][qwer[ii]]]}) `
+                            if (arr[check_st[ii]][qwer[ii]]) p += `${arr2[check_st[ii]]} ${8 - qwer[ii]}추옵(${arr[check_st[ii]][qwer[ii]]}) `
                         mmap.add(p);
                     }
                 }
@@ -264,6 +276,10 @@ class AddOp extends React.Component {
             }
             check_st.length = 0;
         } while (nq.next_permutation(tempVector));
+    }
+
+    cal_stat5 = () => {
+        console.log('hello,world!');
     }
 
     createDivWrap() {
@@ -319,12 +335,29 @@ class AddOp extends React.Component {
         )
     }
 
+    calcGM() {
+        const { lv, stat_arr } = this.state;
+        const fafnir = [12, 18, 24, 32, 41];
+        const absol = [15, 22, 30, 40, 51];
+        const arcanesh = [18, 26, 36, 48, 62];
+        const tmp = lv === 150 ? fafnir : lv === 160 ? absol : arcanesh;
+        const tmp_arr = [];
+        for (let i = 0; i < 5; i++) {
+            let tmp_gong = stat_arr[7] / stat_arr[6] * 100;
+            let tmp_ma = stat_arr[7] / stat_arr[8] * 100;
+            if (tmp_gong === tmp[i]) tmp_arr.push(tmp_gong);
+            if (tmp_ma === tmp[i]) tmp_arr.push(tmp_ma);
+        }
+        console.log(tmp_arr);
+    }
+
     render() {
         return (
             <>
                 <this.inputAddOp />
                 <div className="view_stat">
-                    <ViewAddOp data={this.state.addop_sol} />
+                    <ViewAddOp data={this.state.addop_sol} lv={this.state.lv} />
+                    {/* <this.calcGM /> */}
                 </div>
                 <this.floatingStat />
             </>

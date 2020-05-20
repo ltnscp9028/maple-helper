@@ -1,7 +1,7 @@
 import React from 'react';
 import CreateDiv from './CreateDiv';
-import CalStaticAddOp from './CalcStaticAddOp';
-const CalcGongmaAddOp = ({ lv }) => {
+import CalStaticAddOp from './ViewStaticAddOp';
+const ViewGongmaAddOp = ({ lv }) => {
     return (
         <div className="const_op_form">
             <div className="const_op">{lv}</div>
@@ -16,4 +16,4 @@ const CalcGongmaAddOp = ({ lv }) => {
     )
 }
 
-export default CalcGongmaAddOp;
+export default ViewGongmaAddOp;

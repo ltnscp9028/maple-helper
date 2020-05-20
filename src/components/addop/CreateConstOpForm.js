@@ -1,6 +1,6 @@
 import React from 'react';
 import CreateDiv from './CreateDiv';
-import CalStaticAddOp from './CalcStaticAddOp';
+import CalStaticAddOp from './ViewStaticAddOp';
 const CreateConstOpForm = ({ lv, llv }) => {
     return (
         <div className="const_op_form">

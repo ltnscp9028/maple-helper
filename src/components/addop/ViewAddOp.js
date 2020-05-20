@@ -5,6 +5,7 @@ class ViewAddOp extends React.Component {
     }
 
     render() {
+
         let { data } = this.props;
         let view_arr = [];
         for (let i = 0; i < data.length; i++) {
@@ -15,6 +16,8 @@ class ViewAddOp extends React.Component {
             }
             view_arr.push(<div className="view_div">{arr}</div>);
         }
+
+
         return (
             <>
                 {view_arr}
