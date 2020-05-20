@@ -3,6 +3,7 @@ import React from 'react';
 import './AddOp.css';
 import ViewAddOp from '../components/addop/ViewAddOp';
 import CreateConstOpForm from '../components/addop/CreateConstOpForm';
+import CalcGongmaAddOp from '../components/addop/CalcGongmaAddOp';
 const nq = require('combination-js');
 class AddOp extends React.Component {
     arr = Array(10).fill(null).map(() => Array(8));
@@ -15,7 +16,7 @@ class AddOp extends React.Component {
     stat = [
         'STR', 'DEX', 'INT', 'LUK',
         '최대 HP', '최대 MP',
-        '공격력', '마력',
+        '공격력', '마력', '보공', '데미지',
         '방어력', '이동속도', '점프력', '올스탯', '착용레벨 감소',
     ];
     constructor(props) {
@@ -26,7 +27,7 @@ class AddOp extends React.Component {
     }
 
     state = {
-        stat_arr: Array(13).fill(0),
+        stat_arr: Array(15).fill(0),
         lv: '',
         check_fire: '',
         addop_arr: [],
@@ -269,7 +270,7 @@ class AddOp extends React.Component {
         let temp = [];
         let ret = [];
         const stat = this.stat;
-        for (let i = 0; i < 13; i++) {
+        for (let i = 0; i < stat.length; i++) {
             temp.push(
                 <div className="div_wrap">
                     <div className="form_label">{stat[i]}</div>
@@ -277,7 +278,7 @@ class AddOp extends React.Component {
                 </div>
             )
         }
-        for (let i = 0; i < 13; i++)ret.push(temp[i]);
+        for (let i = 0; i < stat.length; i++)ret.push(temp[i]);
         return (
             <>
                 {ret}
@@ -313,6 +314,7 @@ class AddOp extends React.Component {
                 <CreateConstOpForm lv="140~150제" llv="140" />
                 <CreateConstOpForm lv="160제" llv="160" />
                 <CreateConstOpForm lv="200제" llv="200" />
+                <CalcGongmaAddOp lv="무기" />
             </div>
         )
     }

@@ -5,6 +5,8 @@ class Arcane extends React.Component {
         symbol_list: Array(6),
     }
     input_symbol = () => {
+        let i = 0;
+        let arr = [];
 
     }
     render() {
@@ -15,4 +17,4 @@ class Arcane extends React.Component {
         )
     }
 }
-export default () => '아케인포스';
+export default Arcane;
