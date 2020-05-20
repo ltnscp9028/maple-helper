@@ -1,7 +1,8 @@
 /*eslint-disable */
 import React from 'react';
 import './AddOp.css';
-
+import ViewAddOp from '../components/addop/ViewAddOp';
+import CalcStaticAddOp from '../components/addop/CalcStaticAddOp';
 class AddOp extends React.Component {
     arr = Array(10).fill(null).map(() => Array(8));
     tempVector = [];
@@ -22,13 +23,12 @@ class AddOp extends React.Component {
         this.createDivWrap = this.createDivWrap.bind(this);
         this.createDiv = this.createDiv.bind(this);
         this.floatingStat = this.floatingStat.bind(this);
-        this.calcStaticAddOp = this.calcStaticAddOp.bind(this);
+        // this.calcStaticAddOp = this.calcStaticAddOp.bind(this);
         this.createConstOpForm = this.createConstOpForm.bind(this);
     }
 
     state = {
         stat_arr: Array(13).fill(0),
-        // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         lv: '',
         check_fire: '',
         addop_arr: [],
@@ -68,7 +68,6 @@ class AddOp extends React.Component {
             }),
 
             stat_arr: Array(13).fill(0),
-            // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             lv: '',
             check_fire: '',
             addop_sol: temp_arr,
@@ -88,9 +87,6 @@ class AddOp extends React.Component {
             arr[0][i] = arr[1][i] = arr[2][i] = arr[3][i] = arr[4][i] = (parseInt(lv / 20) + 1) * i;
             arr[5][i] = arr[6][i] = arr[7][i] = arr[8][i] = arr[9][i] = (parseInt(lv / 40) + 1) * i;
         }
-
-        //	for(i=0;i<10;i++,puts(""))
-        //		for(j=0;j<8;j++)printf("%d ",arr[i][j]);
     }
 
     make_pick = () => {
@@ -347,31 +343,19 @@ class AddOp extends React.Component {
         );
     }
 
-    calcStaticAddOp(props) {
-        let tmp_arr = [];
-        // console.log(props.lv,props.sorm);
-        for (let i = 1; i < 8; i++) {
-            tmp_arr.push(<div className="const_op_stat">{parseInt(props.lv / props.sorm + 1) * i}</div>)
-        }
-        return (
-            <>
-                {tmp_arr}
-            </>
-        )
-    }
-
     createConstOpForm(props) {
         return (
             <div className="const_op_form">
                 <div className="const_op">{props.lv}</div>
                 <this.createDiv />
                 <div className="const_op">단일추옵</div>
-                <this.calcStaticAddOp lv={props.llv} sorm={20} />
+                <CalcStaticAddOp lv={props.llv} sorm={20} />
                 <div className="const_op">이중추옵</div>
-                <this.calcStaticAddOp lv={props.llv} sorm={40} />
+                <CalcStaticAddOp lv={props.llv} sorm={40} />
             </div>
         )
     }
+
     floatingStat() {
         return (
             <div className="view_const_stat">
@@ -382,37 +366,13 @@ class AddOp extends React.Component {
         )
     }
 
-
-
-
-    viewAddOp = () => {
-        const { addop_sol } = this.state;
-
-        let view_arr = [];
-        for (let i = 0; i < addop_sol.length; i++) {
-            let arr = [];
-            let tparr = addop_sol[i].split(',');
-            for (let j = 0; j < tparr.length; j++) {
-                arr.push(<div className="view_value">{tparr[j]}</div>);
-            }
-            view_arr.push(<div className="view_div">{arr}</div>);
-        }
-        return (
-            <>
-                {view_arr}
-            </>
-        )
-    }
-    // viewFloatingAddOp = () => {
-    //     return()
-    // }
-
     render() {
         return (
             <>
                 <this.inputAddOp />
                 <div className="view_stat">
-                    <this.viewAddOp />
+                    {/* <this.viewAddOp /> */}
+                    <ViewAddOp data={this.state.addop_sol} />
                 </div>
                 <this.floatingStat />
                 {/* <div className="view_stat">{this.floatingStat}</div> */}
