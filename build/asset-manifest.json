@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/maple-helper/static/css/main.30d23eb8.chunk.css",
-    "main.js": "/maple-helper/static/js/main.450640d7.chunk.js",
-    "main.js.map": "/maple-helper/static/js/main.450640d7.chunk.js.map",
+    "main.js": "/maple-helper/static/js/main.73384c0e.chunk.js",
+    "main.js.map": "/maple-helper/static/js/main.73384c0e.chunk.js.map",
     "runtime-main.js": "/maple-helper/static/js/runtime-main.52a660da.js",
     "runtime-main.js.map": "/maple-helper/static/js/runtime-main.52a660da.js.map",
-    "static/js/2.19e99a04.chunk.js": "/maple-helper/static/js/2.19e99a04.chunk.js",
-    "static/js/2.19e99a04.chunk.js.map": "/maple-helper/static/js/2.19e99a04.chunk.js.map",
+    "static/js/2.21c89b35.chunk.js": "/maple-helper/static/js/2.21c89b35.chunk.js",
+    "static/js/2.21c89b35.chunk.js.map": "/maple-helper/static/js/2.21c89b35.chunk.js.map",
     "index.html": "/maple-helper/index.html",
-    "precache-manifest.3e3abbefd027c4041674a521e3fa3920.js": "/maple-helper/precache-manifest.3e3abbefd027c4041674a521e3fa3920.js",
+    "precache-manifest.1e6dac1571fbe111f56da79bd8b11d55.js": "/maple-helper/precache-manifest.1e6dac1571fbe111f56da79bd8b11d55.js",
     "service-worker.js": "/maple-helper/service-worker.js",
     "static/css/main.30d23eb8.chunk.css.map": "/maple-helper/static/css/main.30d23eb8.chunk.css.map",
-    "static/js/2.19e99a04.chunk.js.LICENSE.txt": "/maple-helper/static/js/2.19e99a04.chunk.js.LICENSE.txt",
+    "static/js/2.21c89b35.chunk.js.LICENSE.txt": "/maple-helper/static/js/2.21c89b35.chunk.js.LICENSE.txt",
     "static/media/Header.css": "/maple-helper/static/media/logo-bg.aa2d728c.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.52a660da.js",
-    "static/js/2.19e99a04.chunk.js",
+    "static/js/2.21c89b35.chunk.js",
     "static/css/main.30d23eb8.chunk.css",
-    "static/js/main.450640d7.chunk.js"
+    "static/js/main.73384c0e.chunk.js"
   ]
 }

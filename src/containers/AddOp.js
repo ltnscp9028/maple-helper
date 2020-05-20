@@ -2,7 +2,8 @@
 import React from 'react';
 import './AddOp.css';
 import ViewAddOp from '../components/addop/ViewAddOp';
-import CalcStaticAddOp from '../components/addop/CalcStaticAddOp';
+import CreateConstOpForm from '../components/addop/CreateConstOpForm';
+const nq = require('combination-js');
 class AddOp extends React.Component {
     arr = Array(10).fill(null).map(() => Array(8));
     tempVector = [];
@@ -21,10 +22,7 @@ class AddOp extends React.Component {
         super(props);
         this.inputAddOp = this.inputAddOp.bind(this);
         this.createDivWrap = this.createDivWrap.bind(this);
-        this.createDiv = this.createDiv.bind(this);
         this.floatingStat = this.floatingStat.bind(this);
-        // this.calcStaticAddOp = this.calcStaticAddOp.bind(this);
-        this.createConstOpForm = this.createConstOpForm.bind(this);
     }
 
     state = {
@@ -93,35 +91,11 @@ class AddOp extends React.Component {
         const nn = 10;
         const scn = 4 - this.stat_gaesu;
         let { v, tempVector } = this;
-        // printf("%d %d\n",nn,scn);
         // console.log(`${nn} ${scn}`);
         for (let i = 0; i < nn; i++)v.push(i);
         for (let i = 0; i < scn; i++)tempVector.push(1);
         for (let i = 0; i < nn - scn; i++)tempVector.push(0);
-        // sort(tempVector.begin(), tempVector.end());
         tempVector.sort();
-    }
-
-    next_permutation = () => {
-        let { tempVector } = this;
-        let idx = -1;
-        for (let i = 0; i < 9; i++)
-            if (tempVector[i] < tempVector[i + 1]) idx = i;
-        if (idx < 0) return 0;
-        for (let i = 9; i > idx; i--) {
-            if (tempVector[idx] < tempVector[i]) {
-                let tmp = tempVector[idx];
-                tempVector[idx] = tempVector[i];
-                tempVector[i] = tmp;
-                break;
-            }
-        }
-        for (let i = idx + 1; i < (11 + idx) / 2; i++) {
-            let tmp = tempVector[i];
-            tempVector[i] = tempVector[10 - (i - idx)];
-            tempVector[10 - (i - idx)] = tmp;
-        }
-        return 1;
     }
 
     s_case = (restat, n, ww) => {
@@ -197,7 +171,7 @@ class AddOp extends React.Component {
                 }
             }
             check_st.length = 0;
-        } while (this.next_permutation());
+        } while (nq.next_permutation(tempVector));
     }
 
     cal_stat2 = () => {
@@ -233,7 +207,7 @@ class AddOp extends React.Component {
             }
             check_st.length = 0;
             //    puts("test");
-        } while (this.next_permutation());
+        } while (nq.next_permutation(tempVector));
     }
 
 
@@ -263,7 +237,7 @@ class AddOp extends React.Component {
                 }
             }
             check_st.length = 0;
-        } while (this.next_permutation());
+        } while (nq.next_permutation(tempVector));
     }
 
     cal_stat4 = () => {
@@ -288,7 +262,7 @@ class AddOp extends React.Component {
                 }
             }
             check_st.length = 0;
-        } while (this.next_permutation());
+        } while (nq.next_permutation(tempVector));
     }
 
     createDivWrap() {
@@ -333,35 +307,12 @@ class AddOp extends React.Component {
         )
     }
 
-    createDiv() {
-        let tmp_arr = [];
-        for (let i = 7; i != 0; i--)tmp_arr.push(<div className="const_op">{i}추옵</div>)
-        return (
-            <>
-                {tmp_arr}
-            </>
-        );
-    }
-
-    createConstOpForm(props) {
-        return (
-            <div className="const_op_form">
-                <div className="const_op">{props.lv}</div>
-                <this.createDiv />
-                <div className="const_op">단일추옵</div>
-                <CalcStaticAddOp lv={props.llv} sorm={20} />
-                <div className="const_op">이중추옵</div>
-                <CalcStaticAddOp lv={props.llv} sorm={40} />
-            </div>
-        )
-    }
-
     floatingStat() {
         return (
             <div className="view_const_stat">
-                <this.createConstOpForm lv="140~150제" llv="140" />
-                <this.createConstOpForm lv="160제" llv="160" />
-                <this.createConstOpForm lv="200제" llv="200" />
+                <CreateConstOpForm lv="140~150제" llv="140" />
+                <CreateConstOpForm lv="160제" llv="160" />
+                <CreateConstOpForm lv="200제" llv="200" />
             </div>
         )
     }
@@ -371,12 +322,9 @@ class AddOp extends React.Component {
             <>
                 <this.inputAddOp />
                 <div className="view_stat">
-                    {/* <this.viewAddOp /> */}
                     <ViewAddOp data={this.state.addop_sol} />
                 </div>
                 <this.floatingStat />
-                {/* <div className="view_stat">{this.floatingStat}</div> */}
-
             </>
         );
     }
