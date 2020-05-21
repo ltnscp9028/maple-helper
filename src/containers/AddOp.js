@@ -2,8 +2,6 @@
 import React from 'react';
 import './AddOp.css';
 import ViewAddOp from '../components/addop/ViewAddOp';
-import CreateConstOpForm from '../components/addop/CreateConstOpForm';
-import ViewGongmaAddOp from '../components/addop/ViewGongmaAddOp';
 import InputAddOp from '../components/addop/InputAddOp';
 import FloatingStat from '../components/addop/FloatingStat';
 const nq = require('combination-js');
@@ -12,6 +10,7 @@ class AddOp extends React.Component {
     tempVector = [];
     v = [];
     check_st = [];
+    gm_addop = [];
     j = 0; chk = 0; fire_yn = 0; stat_gaesu = 0; id = 0;
     mmap = new Set();
     arr2 = ['STR', 'DEX', 'LUK', 'INT', 'STR+DEX', 'STR+INT', 'STR+LUK', 'DEX+INT', 'DEX+LUK', 'INT+LUK'];
@@ -26,8 +25,8 @@ class AddOp extends React.Component {
 
     constructor(props) {
         super(props);
-        this.floatingStat = this.floatingStat.bind(this);
-        this.calcGM = this.calcGM.bind(this);
+        // this.floatingStat = this.floatingStat.bind(this);
+        // this.calcGM = this.calcGM.bind(this);
     }
 
     state = {
@@ -59,13 +58,12 @@ class AddOp extends React.Component {
         let temp_arr = [];
         e.preventDefault();
         for (let i = 4; i < this.stat.length; i++)if (stat_arr[i] != 0 && i != 6) this.stat_gaesu++;
-        // console.log('check_fire : ' + this.state.check_fire, 'stat_gaesu : ' + this.stat_gaesu);
         this.set_addop();
         this.make_pick();
-        // console.log(stat_arr);
-        // console.log(this.stat_gaesu + 1);
-        this.cal_stat(4 - this.stat_gaesu);
-        this.calcGM();
+        if (this.stat_gaesu != 4) this.cal_stat(4 - this.stat_gaesu);
+        // this.calcGM();
+        // let tmp_gm = JSON.parse(JSON.stringify(this.gm_addop));
+        this.calc_gm();
         mmap.forEach(value => temp_arr.push(value));
         this.setState({
             addop_arr: addop_arr.concat({
@@ -84,6 +82,7 @@ class AddOp extends React.Component {
         this.tempVector = [];
         this.check_st = [];
         this.v = [];
+        // this.gm_addop = [];
     }
 
     set_addop = () => {
@@ -219,35 +218,27 @@ class AddOp extends React.Component {
         console.log('hello,world!');
     }
 
-    floatingStat = () => {
-        return (
-            <div className="view_const_stat">
-                <CreateConstOpForm lv="140~150제" llv="140" />
-                <CreateConstOpForm lv="160제" llv="160" />
-                <CreateConstOpForm lv="200제" llv="200" />
-                <ViewGongmaAddOp lv="무기" />
-            </div>
-        )
-    }
-
-    calcGM() {
+    //14,9,10
+    calc_gm = () => {
+        this.gm_addop.length = 0;
         const { lv, stat_arr } = this.state;
         const fafnir = [12, 18, 24, 32, 41];
         const absol = [15, 22, 30, 40, 51];
         const arcanesh = [18, 26, 36, 48, 62];
         const tmp = lv == 150 ? fafnir : lv == 160 ? absol : arcanesh;
-        console.log(`lv:${lv}`);
         let tmp_gong = Math.floor(stat_arr[7] / stat_arr[6] * 100);
-        let tmp_ma = Math.floor(stat_arr[7] / stat_arr[8] * 100);
-        const tmp_arr = [];
-        console.log(tmp);
+        let tmp_ma = Math.floor(stat_arr[8] / stat_arr[6] * 100);
         for (let i = 0; i < 5; i++) {
-
-            // console.log(`temp_gong:${tmp_gong} , temp_ma:${tmp_ma}`)
-            if (tmp_gong === tmp[i]) tmp_arr.push(tmp_gong);
-            if (tmp_ma === tmp[i]) tmp_arr.push(tmp_ma);
+            if (tmp_gong == tmp[i]) {
+                this.gm_addop.push(`공격력 ${i}추옵(${stat_arr[7]})`);
+            }
+            if (tmp_ma == tmp[i]) {
+                this.gm_addop.push(`마력  ${i}추옵(${stat_arr[8]})`);
+            }
         }
-        console.log(tmp_arr);
+        if (stat_arr[9]) this.gm_addop.push(`보공 ${8 - stat_arr[9] / 2}추옵(${stat_arr[9]}%)`);
+        if (stat_arr[10]) this.gm_addop.push(`데미지 ${8 - stat_arr[10]}추옵(${stat_arr[10]}%)`);
+        if (stat_arr[14]) this.gm_addop.push(`올스탯 ${8 - stat_arr[14]}추옵(${stat_arr[14]}%)`);
     }
 
     render() {
@@ -259,7 +250,7 @@ class AddOp extends React.Component {
                     lv={this.state.lv} check_fire={this.state.check_fire}
                     stat_arr={this.state.stat_arr} stat={this.stat} handleChange={this.handleChange} />
                 <div className="view_stat">
-                    <ViewAddOp data={this.state.addop_sol} lv={this.state.lv} />
+                    <ViewAddOp data={this.state.addop_sol} lv={this.state.lv} stat_arr={this.state.stat_arr} gm_addop={this.gm_addop} />
                     {/* <this.calcGM /> */}
                 </div>
                 <FloatingStat />
