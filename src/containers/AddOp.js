@@ -25,8 +25,6 @@ class AddOp extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.floatingStat = this.floatingStat.bind(this);
-        // this.calcGM = this.calcGM.bind(this);
     }
 
     state = {
@@ -61,8 +59,6 @@ class AddOp extends React.Component {
         this.set_addop();
         this.make_pick();
         if (this.stat_gaesu != 4) this.cal_stat(4 - this.stat_gaesu);
-        // this.calcGM();
-        // let tmp_gm = JSON.parse(JSON.stringify(this.gm_addop));
         this.calc_gm();
         mmap.forEach(value => temp_arr.push(value));
         this.setState({
@@ -76,20 +72,17 @@ class AddOp extends React.Component {
             addop_sol: temp_arr,
         })
         console.log('test');
-        // console.log(mmap);
         mmap.clear();
         this.stat_gaesu = 0;
         this.tempVector = [];
         this.check_st = [];
         this.v = [];
-        // this.gm_addop = [];
     }
 
     set_addop = () => {
         const { lv } = this.state;
         let { arr } = this;
         for (let i = 0; i < 8; i++) {
-            // 7,8,12,13,14
             arr[0][i] = arr[1][i] = arr[2][i] = arr[3][i] = arr[4][i] = (parseInt(lv / 20) + 1) * i;
             arr[5][i] = arr[6][i] = arr[7][i] = arr[8][i] = arr[9][i] = (parseInt(lv / 40) + 1) * i;
         }
@@ -214,10 +207,6 @@ class AddOp extends React.Component {
         } while (nq.next_permutation(tempVector));
     }
 
-    cal_stat5 = () => {
-        console.log('hello,world!');
-    }
-
     //14,9,10
     calc_gm = () => {
         this.gm_addop.length = 0;
@@ -229,12 +218,12 @@ class AddOp extends React.Component {
         let tmp_gong = Math.floor(stat_arr[7] / stat_arr[6] * 100);
         let tmp_ma = Math.floor(stat_arr[8] / stat_arr[6] * 100);
         for (let i = 0; i < 5; i++) {
-            if (tmp_gong == tmp[i]) {
+            if (tmp_gong == tmp[i])
                 this.gm_addop.push(`공격력 ${i}추옵(${stat_arr[7]})`);
-            }
-            if (tmp_ma == tmp[i]) {
+
+            if (tmp_ma == tmp[i])
                 this.gm_addop.push(`마력  ${i}추옵(${stat_arr[8]})`);
-            }
+
         }
         if (stat_arr[9]) this.gm_addop.push(`보공 ${8 - stat_arr[9] / 2}추옵(${stat_arr[9]}%)`);
         if (stat_arr[10]) this.gm_addop.push(`데미지 ${8 - stat_arr[10]}추옵(${stat_arr[10]}%)`);
@@ -244,14 +233,12 @@ class AddOp extends React.Component {
     render() {
         return (
             <>
-                {/* <this.inputAddOp /> */}
                 <InputAddOp
                     handleChangeSingle={this.handleChangeSingle} handleSubmit={this.handleSubmit}
                     lv={this.state.lv} check_fire={this.state.check_fire}
                     stat_arr={this.state.stat_arr} stat={this.stat} handleChange={this.handleChange} />
                 <div className="view_stat">
                     <ViewAddOp data={this.state.addop_sol} lv={this.state.lv} stat_arr={this.state.stat_arr} gm_addop={this.gm_addop} />
-                    {/* <this.calcGM /> */}
                 </div>
                 <FloatingStat />
             </>
