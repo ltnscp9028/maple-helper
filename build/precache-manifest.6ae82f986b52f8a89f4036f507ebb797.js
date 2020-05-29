@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7db30a2158660c2f642ff9bbdc7812d9",
+    "revision": "a76fe588e7134e7f81235c0ad0846686",
     "url": "/maple-helper/index.html"
   },
   {
